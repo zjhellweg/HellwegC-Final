@@ -18,6 +18,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[EmployeeAccounts]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Employees]",
          "ObjectType": 0
       },

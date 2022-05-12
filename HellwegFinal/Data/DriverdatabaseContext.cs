@@ -24,6 +24,7 @@ namespace HellwegFinal.Data
         public virtual DbSet<DriverCar> DriverCars { get; set; }
         public virtual DbSet<EmpRole> EmpRoles { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EmployeeAccount> EmployeeAccounts { get; set; }
         public virtual DbSet<Infraction> Infractions { get; set; }
         public virtual DbSet<InfractionType> InfractionTypes { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
@@ -120,6 +121,26 @@ namespace HellwegFinal.Data
                     .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.EmproleIndex)
                     .HasConstraintName("FK__Employees__EMPRo__2C3393D0");
+            });
+
+            modelBuilder.Entity<EmployeeAccount>(entity =>
+            {
+                entity.HasKey(e => e.EmployeeIndex)
+                    .HasName("AccountPrimary");
+
+                entity.Property(e => e.EmployeeIndex).ValueGeneratedNever();
+
+                entity.Property(e => e.EmployeePassword)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmployeeRole)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmployeeUser)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Infraction>(entity =>
