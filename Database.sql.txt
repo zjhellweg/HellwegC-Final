@@ -1,13 +1,13 @@
 USE [master]
 GO
-/****** Object:  Database [DriverDatabase]    Script Date: 5/11/2022 7:51:23 PM ******/
+/****** Object:  Database [DriverDatabase]    Script Date: 5/11/2022 11:01:14 PM ******/
 CREATE DATABASE [DriverDatabase]
 
-
 GO
+
 USE [DriverDatabase]
 GO
-/****** Object:  Table [dbo].[Drivers]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  Table [dbo].[Drivers]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,7 +24,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Vehicle]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  Table [dbo].[Vehicle]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -41,7 +41,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[DriverCars]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  View [dbo].[DriverCars]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -59,7 +59,24 @@ From
 Join 
 	Vehicle V on D.DriverIndex = V.VehicleOwner
 GO
-/****** Object:  Table [dbo].[Employees]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  Table [dbo].[EmployeeAccounts]    Script Date: 5/11/2022 11:01:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeeAccounts](
+	[EmployeeIndex] [int] NOT NULL,
+	[EmployeeUser] [varchar](20) NULL,
+	[EmployeePassword] [varchar](20) NULL,
+	[EmployeeRole] [varchar](20) NULL,
+	[EmployeeLogins] [int] NULL,
+ CONSTRAINT [AccountPrimary] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeIndex] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Employees]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +93,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EmpRoles]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  Table [dbo].[EmpRoles]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -91,7 +108,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Infractions]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  Table [dbo].[Infractions]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +126,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfractionType]    Script Date: 5/11/2022 7:51:24 PM ******/
+/****** Object:  Table [dbo].[InfractionType]    Script Date: 5/11/2022 11:01:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -523,6 +540,12 @@ GO
 INSERT [dbo].[Drivers] ([DriverIndex], [FirstName], [LastName], [DateOfBirth], [SSN]) VALUES (198, N'Laura', N'Howard', NULL, N'948421285')
 GO
 INSERT [dbo].[Drivers] ([DriverIndex], [FirstName], [LastName], [DateOfBirth], [SSN]) VALUES (199, N'Brenda', N'Campbell', NULL, N'267983669')
+GO
+INSERT [dbo].[EmployeeAccounts] ([EmployeeIndex], [EmployeeUser], [EmployeePassword], [EmployeeRole], [EmployeeLogins]) VALUES (0, N'test', N'password', N'dmv', 0)
+GO
+INSERT [dbo].[EmployeeAccounts] ([EmployeeIndex], [EmployeeUser], [EmployeePassword], [EmployeeRole], [EmployeeLogins]) VALUES (1, N'test2', N'password2', N'cop', 0)
+GO
+INSERT [dbo].[EmployeeAccounts] ([EmployeeIndex], [EmployeeUser], [EmployeePassword], [EmployeeRole], [EmployeeLogins]) VALUES (2, N'test3', N'password3', N'none', 0)
 GO
 INSERT [dbo].[Employees] ([EmployeeIndex], [FirstName], [LastName], [DateOfBirth], [EMPRoleIndex]) VALUES (0, N'Abigail', N'Jackson', NULL, 1)
 GO
